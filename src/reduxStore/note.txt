@@ -1,4 +1,8 @@
 1.create store : store.js
-2.create slice : counterSlice.js
+2.create reducer : counterReducer.js
 3.setup of store
 4.linked store to react-app : React-Redux
+5.dispatch action and useSelector
+6.persist and rehyderate a redux store
+  install library :  npm i redux-persistence
+

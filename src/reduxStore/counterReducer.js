@@ -6,13 +6,13 @@ export const counterSlice = createSlice({
     value: 0,
   },
   reducers: {
-    incremented: (state) => {
+    increment: (state) => {
       state.value++;
     },
-    decremented: (state) => {
+    decrement: (state) => {
       state.value--;
     },
   },
 });
 
-export const { incremented, decremented } = counterSlice.actions;
+export const { increment, decrement } = counterSlice.actions;

@@ -1,18 +1,19 @@
 import React from "react";
-import { incremented, decremented } from "../reduxStore/counterReducer";
+import { increment, decrement } from "../reduxStore/counterReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 function Counter() {
   const dispatch = useDispatch();
-  const { value } = useSelector((a) => a);
+  const { counterReducer } = useSelector((a) => a);
 
   const incrementAmont = () => {
-    dispatch(incremented());
+    dispatch(increment());
   };
 
   const decrementAmount = () => {
-    dispatch(decremented());
+    dispatch(decrement());
   };
+
   return (
     <div className="text-center text-3xl font-bold mt-10">
       <h1>Counter App</h1>
@@ -23,7 +24,7 @@ function Counter() {
         >
           Increment
         </button>
-        <span className="mx-4 text-2xl font-bold">{value}</span>
+        <span className="mx-4 text-2xl font-bold">{counterReducer.value}</span>
         <button
           onClick={decrementAmount}
           className="text-lg bg-indigo-600 text-white px-4 py2 border-2"
