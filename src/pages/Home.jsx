@@ -1,9 +1,9 @@
 import React from "react";
-import Counter from "./Counter";
+
 function Home() {
   return (
     <div>
-      <Counter />
+      <h1>Home component</h1>
     </div>
   );
 }
