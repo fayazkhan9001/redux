@@ -1,36 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { add } from "../reduxStore/cartSlice";
-import axios from "axios";
-function Products() {
-  const [products, getProducts] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => getProducts(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { remove } from "../../reduxStore/cartSlice";
+import { RadialGradient } from "react-text-gradients";
 
+function CartProduct() {
+  const product = useSelector((state) => state.cart);
   return (
     <div>
       <h1 className="text-center font-bold text-3xl p-2 underline underline-offset-4">
-        Products Dashboard
+        Cart Products Dashboard
       </h1>
       <div className="flex flex-wrap justify-center">
-        {products?.map((product, idx) => {
-          return <Card product={product} key={idx} />;
-        })}
+        {product?.length < 1 ? (
+          <h1 className="text-4xl mt-40 font-mono">
+            <RadialGradient gradient={["red, blue"]}>
+              Cart is empty
+            </RadialGradient>
+          </h1>
+        ) : (
+          product?.map((product, idx) => {
+            return <Card product={product} key={idx} />;
+          })
+        )}
       </div>
     </div>
   );
 }
 
-export default Products;
+export default CartProduct;
 
 function Card({ product }) {
   const dispatch = useDispatch();
-  const addToCart = () => {
-    dispatch(add(product));
+
+  const removeCart = (id) => {
+    dispatch(remove(id));
   };
   return (
     <div className="p-2">
@@ -55,10 +58,10 @@ function Card({ product }) {
             ${product.price}
           </span>
           <button
-            onClick={() => addToCart(product)}
+            onClick={() => removeCart(product.id)}
             className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
           >
-            Add to Cart
+            Remove item
           </button>
         </div>
       </div>

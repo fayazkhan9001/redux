@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import Counter from "./pages/Counter";
 import RootLayout from "./pages/components/RootLayout";
 import Products from "./pages/Products";
+import CartProduct from "./pages/components/CartProduct";
 
 function App() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/cartproduct" element={<CartProduct />} />
       </Route>
     )
   );
