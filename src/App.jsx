@@ -7,16 +7,18 @@ import {
   Route,
 } from "react-router-dom";
 
-import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Counter from "./pages/Counter";
+import RootLayout from "./pages/components/RootLayout";
+import Products from "./pages/Products";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Contact />}>
-        <Route path="/contact" element={<Home />} />
+      <Route path="/" element={<RootLayout />}>
+        <Route path="/contact" element={<Contact />} />
         <Route path="/counter" element={<Counter />} />
+        <Route path="/products" element={<Products />} />
       </Route>
     )
   );

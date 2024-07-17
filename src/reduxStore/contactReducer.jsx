@@ -8,8 +8,13 @@ export const contactSlice = createSlice({
   reducers: {
     addToContacts: (state, action) => {
       state.contacts.push(action.payload);
+      console.log(action.payload);
+    },
+    deleteContact: (state, action) => {
+      const filteredArr = state?.contacts.filter((c) => c.id != action.payload);
+      state.contacts = filteredArr;
     },
   },
 });
 
-export const { addToContacts } = contactSlice.actions;
+export const { addToContacts, deleteContact } = contactSlice.actions;

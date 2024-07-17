@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoTrashOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { addToContacts } from "../reduxStore/contactReducer";
+import { addToContacts, deleteContact } from "../reduxStore/contactReducer";
 import { useSelector } from "react-redux";
 
 function Contact() {
@@ -27,9 +27,17 @@ function Contact() {
         ...values,
         id: Date.now(),
       };
+
       dispatch(addToContacts(newContact));
     },
   });
+
+  const handleDelete = (id) => {
+    dispatch(deleteContact(id));
+  };
+  const handleUpdate = (id) => {
+    console.log(id);
+  };
   return (
     <div>
       <div className="w-96 mx-auto p-8">
@@ -72,22 +80,36 @@ function Contact() {
           </tr>
         </thead>
         <tbody>
-          {contactReducer.contacts.map((item, idx) => (
-            <tr key={idx}>
-              <td className="pl-4">{idx + 1}</td>
-              <td className="pl-6">{item.name}</td>
-              <td className="pl-6">{item.email}</td>
-              <td className="pl-6">{item.contact}</td>
-              <td className="flex items-center justify-evenly text-2xl font-bold ">
-                <span>
-                  <BsPencilSquare className="cursor-pointer text-blue-800" />
-                </span>
-                <span>
-                  <IoTrashOutline className="cursor-pointer text-orange-700" />
-                </span>
+          {contactReducer?.contacts?.length < 1 ? (
+            <tr>
+              <td>
+                <h1>data not found...</h1>
               </td>
             </tr>
-          ))}
+          ) : (
+            contactReducer?.contacts?.map((item, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.contact}</td>
+                <td className="flex justify-evenly">
+                  <span>
+                    <BsPencilSquare
+                      onClick={() => handleUpdate(item.id)}
+                      className="text-xl font-bold text-indigo-600 cursor-pointer"
+                    />
+                  </span>
+                  <span>
+                    <IoTrashOutline
+                      onClick={() => handleDelete(item.id)}
+                      className="text-xl font-bold text-orange-600 cursor-pointer"
+                    />
+                  </span>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
